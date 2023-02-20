@@ -1,3 +1,11 @@
-<div>
-    <%- project.description%>
+<head>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<div class="project-card-container">
+    <div class="project-image-container">
+        <img src="<%=project.image_url%>" alt="<%=project.name%>" class="project-image"/>
+    </div>
+    <div class="project-name">
+        <%-project.name%>
+    </div>
 </div>
