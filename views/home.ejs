@@ -11,10 +11,16 @@
     <div class="project-list-page-wrapper">
         <h1 id="page-title">Projects</h1>
         <div class="projects-card-wrapper">
-            <% projects.projects.forEach(project => {%>
+            <% projects.forEach(project => {%>
                 <%- include('./projectCard', {project: project}) %>
             <% }); %>
         </div>
     </div>
 </body>
 </html>
+<script>
+    const fetchOwnerdata = async (id) => {
+        fetch(`http://localhost:3000/owner/${id}`)
+
+    }
+</script>

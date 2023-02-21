@@ -9,6 +9,27 @@ h1{
     color: $whiteText;
 }
 
+// reuseable class names
+.absolute{
+    position: absolute;
+}
+
+.wh100{
+    width: 100%;
+    height: 100%;
+}
+
+.truncate {
+    /* Avoids text being rendered outside the container */
+    width: 100%;
+    overflow: hidden;
+    /* Avoid text going to multiple lines */
+    white-space: nowrap;
+    /* Sets the ... once the text overflows */
+    text-overflow: ellipsis;
+}
+
+// All projects css
 .project-list-page-wrapper{
     display: flex;
     flex-direction: column;
@@ -16,35 +37,116 @@ h1{
     box-sizing: border-box;
     padding: 0 10%;
 }
+
 .projects-card-wrapper{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 1rem;
+    max-width: 1250px;
     box-sizing: border-box;
-    max-width: 1200px;
 }
 
 .project-card-container{
     cursor: pointer;
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 350px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 .project-image-container{
+    border: solid thin #c19e54a3;
+    overflow: hidden;
+    border-radius: 10px;
     width: 100%;
-    height: 100%;
-}
-.project-image{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(65%);
+    height: 250px;
 }
 
-.project-name{
-    color: $whiteText;
-    position: absolute;
+.project-image{
+    transition: all .3s ease-in-out;
+}
+
+.project-image-container:hover{
+    .project-image {
+            filter: brightness(30%);
+            transform: scale(1.3);
+        }
+    .project-summary {
+        visibility: visible;
+    }
+}
+.project-summary {
     top: 1rem;
     left: 1.5rem;
-    font-size: 1.5rem;
+    padding-right: 15px;
+    color: rgba(255, 255, 255, 0.842);
+    visibility: hidden;
+}
+
+
+.project-name{
+    padding-top: 10px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    color: #e0c17d;
+}
+
+.project-owner{
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+    font-size: 1rem;
+    color: rgba(208, 205, 205, 0.76);
+    width: fit-content;
+    height: 50px;
+    padding: 0;
+}
+
+.project-owner img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+// tooltip css
+.owner-info-wrapper{
+    bottom: 100%;
+    background-color: #252525;;
+    min-width: 250px;
+    padding: 1rem;
+    border-radius: 20px;
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.886);
+}
+
+.owner-info-wrapper{
+    visibility: hidden;
+}
+
+.project-owner:hover{
+    .owner-info-wrapper {
+            visibility: visible;
+        }
+}
+
+.owner-info-username-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.owner-info-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.owner-info-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 200;
+    margin: 10px;
 }

@@ -1,0 +1,19 @@
+<div class="owner-info-wrapper absolute">
+    <div class="owner-info-username-container">
+        <img src="<%=owner.image_url%>" class="owner-info-image"/>
+        <div class="owner-info-screen-name"><%-owner.screen_name%></div>
+    </div>
+    <div class="owner-info-container">
+        <% if (owner.location) {%>
+            <div>
+            Location: <%-owner.location%>
+            </div>
+        <% } %>
+        <div>
+            <%-owner.about_me ? owner.about_me: owner.who_am_i ? owner.who_am_i : ""%>
+        </div>
+        <div>
+            <%-owner.followers%> Followers | Rank: <%-owner.rank%>
+        </div>
+    </div>
+</div>
