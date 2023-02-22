@@ -1,0 +1,33 @@
+<div class="container-fluid px-0">
+    <div class="bg-black text-white text-center px-5 py-5">
+        <h1 class="project-title mb-4 fw-bold"><%- project.name %></h1>
+        <p class="summary fw-light mb-4"><%- project.summary %></p>
+        <div class="d-flex align-items-center justify-content-center gap-2 mb-4">
+            <img src="<%=project.owner.image_url%>" width="40" height="40" alt=">%=project.owner.username%>" class="rounded-circle"/>
+            <div><%-project.owner.username%></div>
+        </div>
+    </div>
+    <div class="bg-light d-flex justify-content-center">
+        <div class="container row px-5 bg-dark text-white">
+            <div class="projet-stat col-lg-5 col-md-12 d-flex gap-5">
+                <div class="projet-stat d-flex gap-1">
+                    <div class="fw-bold fs-4"><%-project.views%></div>
+                    <small>views</small>
+                </div>
+                <div class="projet-stat d-flex gap-1">
+                    <div class="fw-bold fs-4"><%-project.comments%></div>
+                    <small>comments</small>
+                </div>
+                <div class="projet-stat d-flex gap-1">
+                    <div class="fw-bold fs-4"><%-project.followers%></div>
+                    <small>followers</small>
+                </div>
+                <div class="projet-stat d-flex gap-1">
+                    <div class="fw-bold fs-4"><%-project.skulls%></div>
+                    <small>likes</small>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 px-5 border">sdf</div>
+        </div>
+    </div>
+</div>

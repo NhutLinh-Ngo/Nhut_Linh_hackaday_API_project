@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Hackaday Projects</title>
-</head>
-<body>
-    <div class="project-list-page-wrapper">
-        <h1 id="page-title">Projects</h1>
-        <div class="projects-card-wrapper">
-            <% projects.forEach(project => {%>
-                <%- include('./projectCard', {project: project}) %>
-            <% }); %>
+<div class="project-list-page-wrapper">
+    <h1 id="page-title">Projects</h1>
+    <div class="projects-card-wrapper">
+        <% projects.forEach(project => {%>
+            <%- include('./projectCard', {project: project}) %>
+        <% }); %>
         </div>
-    </div>
-</body>
-</html>
-<script>
-    const fetchOwnerdata = async (id) => {
-        fetch(`http://localhost:3000/owner/${id}`)
-
-    }
-</script>
+</div>
