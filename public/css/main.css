@@ -18,6 +18,14 @@ h1 {
   height: 100%;
 }
 
+.text-gold {
+  color: #e0c17d;
+}
+
+.active {
+  border-bottom: 2px solid #e0c17d;
+}
+
 .truncate {
   /* Avoids text being rendered outside the container */
   width: 100%;
@@ -171,4 +179,8 @@ h1 {
   .summary {
     font-size: 1rem;
   }
+}
+.project-stats-wrapper {
+  background-color: #6c6c6c;
+  border: solid thin rgba(193, 158, 84, 0.6392156863);
 }

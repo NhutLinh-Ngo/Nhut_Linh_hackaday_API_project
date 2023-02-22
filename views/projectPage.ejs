@@ -1,3 +1,27 @@
+<% function abbreviateNumber(value) {
+	var newValue = value;
+	if (value >= 1000) {
+		var suffixes = ['', 'k', 'm', 'b', 't'];
+		var suffixNum = Math.floor(('' + value).length / 3);
+		var shortValue = '';
+		for (var precision = 2; precision >= 1; precision--) {
+			shortValue = parseFloat(
+				(suffixNum != 0
+					? value / Math.pow(1000, suffixNum)
+					: value
+				).toPrecision(precision)
+			);
+			var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
+			if (dotLessShortValue.length <= 2) {
+				break;
+			}
+		}
+		if (shortValue % 1 != 0) shortValue = shortValue.toFixed(1);
+		newValue = shortValue + suffixes[suffixNum];
+	}
+	return newValue;
+}
+%>
 <div class="container-fluid px-0">
     <div class="bg-black text-white text-center px-5 py-5">
         <h1 class="project-title mb-4 fw-bold"><%- project.name %></h1>
@@ -7,27 +31,79 @@
             <div><%-project.owner.username%></div>
         </div>
     </div>
-    <div class="bg-light d-flex justify-content-center">
-        <div class="container row px-5 bg-dark text-white">
-            <div class="projet-stat col-lg-5 col-md-12 d-flex gap-5">
+
+    <!-- Project stats and menu scroll -->
+    <div class="project-stats-wrapper d-flex justify-content-center">
+        <div class="container row px-5 text-white">
+            <div class="projet-stat col-xl-5 col-md-12 d-flex justify-content-center justify-content-md-start ps-0 py-4 gap-4">
                 <div class="projet-stat d-flex gap-1">
-                    <div class="fw-bold fs-4"><%-project.views%></div>
-                    <small>views</small>
+                    <div class="fw-bold fs-5"><%-abbreviateNumber(project.views)%></div>
+                    <small class="text-gold">views</small>
                 </div>
                 <div class="projet-stat d-flex gap-1">
-                    <div class="fw-bold fs-4"><%-project.comments%></div>
-                    <small>comments</small>
+                    <div class="fw-bold fs-5"><%-abbreviateNumber(project.comments)%></div>
+                    <small class="text-gold">comments</small>
                 </div>
                 <div class="projet-stat d-flex gap-1">
-                    <div class="fw-bold fs-4"><%-project.followers%></div>
-                    <small>followers</small>
+                    <div class="fw-bold fs-5"><%-abbreviateNumber(project.followers)%></div>
+                    <small class="text-gold">followers</small>
                 </div>
                 <div class="projet-stat d-flex gap-1">
-                    <div class="fw-bold fs-4"><%-project.skulls%></div>
-                    <small>likes</small>
+                    <div class="fw-bold fs-5"><%-abbreviateNumber(project.skulls)%></div>
+                    <small class="text-gold">likes</small>
                 </div>
             </div>
-            <div class="col-lg-7 col-md-12 px-5 border">sdf</div>
+            <nav class="navigation col-xl-7 col-md-12 d-flex justify-content-center justify-content-md-start gap-4 gap-md-5 ps-0 fw-semibold">
+                <a class="py-4 text-decoration-none text-white" href="#project-description">
+                    Description
+                </a>
+                <a class="project-details py-4 text-decoration-none text-white" href="#project-details">
+                    Details
+                </a>
+                <a class="project-components py-4 text-decoration-none text-white" href="#project-components">
+                    Components
+                </a>
+                <a class="project-logs py-4 text-decoration-none text-white" href="#project-logs">
+                    Logs
+                </a>
+                <a class="project-instructions py-4 text-decoration-none text-white" href="#project-instructions">
+                    Instructions
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!--  Project Info Body-->
+    <div class="d-flex justify-content-center mt-4">
+        <div class="container row px-5 text-white">
+            <div class="projet-stat col-xl-5 col-md-12 d-flex justify-content-center justify-content-md-start gap-4 ps-0 ">
+                Images go here
+            </div>
+            <div class="navigation col-xl-7 col-md-12 d-flex justify-content-center justify-content-md-start gap-4 gap-md-5 ps-0">
+                project details goes here
+            </div>
         </div>
     </div>
 </div>
+<script>
+    // scroll function, setting anchor tag active
+    const links = document.querySelectorAll(".navigation a");
+
+        for (const link of links) {
+            link.addEventListener("click", clickHandler);
+        }
+
+        function clickHandler(e) {
+            e.preventDefault();
+            const href = this.getAttribute("href");
+            const offsetTop = document.querySelector(href).offsetTop;
+            this.classList.add('active')
+            links.forEach(link => {
+                if(link.getAttribute("href") !== href) link.classList.remove('active')
+            })
+            scroll({
+                top: offsetTop,
+                behavior: "smooth"
+            });
+        }
+</script>
