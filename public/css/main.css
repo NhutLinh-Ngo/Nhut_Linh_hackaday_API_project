@@ -184,3 +184,25 @@ h1 {
   background-color: #6c6c6c;
   border: solid thin rgba(193, 158, 84, 0.6392156863);
 }
+
+.projet-images {
+  display: flex;
+  flex-direction: column;
+  padding-right: 120px;
+}
+
+@media screen and (max-width: 1200px) {
+  .projet-images {
+    padding-right: 0;
+  }
+}
+.project-gallary-holder {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-image-anchor {
+  width: 120px;
+  height: 100px;
+}

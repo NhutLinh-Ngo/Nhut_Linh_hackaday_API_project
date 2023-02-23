@@ -2,6 +2,7 @@ $blackBackground: #171717;
 $whiteText: white;
 $mobileBreakPoint: 360px;
 $tabletBreakPoint: 768px;
+$largeBreakPoint: 1200px;
 body{
     background-color: $blackBackground;
     font-family: 'Mulish', sans-serif;
@@ -194,4 +195,25 @@ h1{
 .project-stats-wrapper{
     background-color: #6c6c6c;
     border: solid thin #c19e54a3;
+}
+
+.projet-images{
+    display: flex;
+    flex-direction: column;
+    padding-right: 120px;
+}
+@media screen and (max-width: $largeBreakPoint) {
+    .projet-images {
+        padding-right: 0;
+        }
+
+}
+.project-gallary-holder{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+.project-image-anchor{
+    width: 120px;
+    height: 100px;
 }
