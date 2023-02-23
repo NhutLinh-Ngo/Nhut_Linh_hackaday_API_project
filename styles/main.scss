@@ -1,8 +1,12 @@
 $blackBackground: #171717;
 $whiteText: white;
+$goldText: #e0c17d;
 $mobileBreakPoint: 360px;
 $tabletBreakPoint: 768px;
 $largeBreakPoint: 1200px;
+figure{
+    display: block;
+}
 body{
     background-color: $blackBackground;
     font-family: 'Mulish', sans-serif;
@@ -65,7 +69,7 @@ h1{
     box-sizing: border-box;
 }
 .project-image-container{
-    border: solid thin #c19e54a3;
+    border: solid thin $goldText;
     overflow: hidden;
     border-radius: 10px;
     width: 100%;
@@ -171,6 +175,7 @@ h1{
 
 // Project page
 
+// Project titles
 .project-title{
     font-size: 3rem;
 }
@@ -192,11 +197,15 @@ h1{
 
 }
 
+
+// project stats
 .project-stats-wrapper{
     background-color: #6c6c6c;
     border: solid thin #c19e54a3;
 }
 
+
+// project gallary
 .projet-images{
     display: flex;
     flex-direction: column;
@@ -211,9 +220,31 @@ h1{
 .project-gallary-holder{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 0.5rem;
 }
 .project-image-anchor{
     width: 120px;
     height: 100px;
 }
+
+
+// Project details sections
+.section-title{
+    color: #535050;
+}
+
+#project-details a{
+    color: #e0c17d;
+    text-decoration: none;
+}
+.section-seperator{
+    border: thin solid #6c6c6c;
+}
+
+#project-details img{
+    width: 100%;
+    border-radius: 5px;
+}
+
+
+// Project Components

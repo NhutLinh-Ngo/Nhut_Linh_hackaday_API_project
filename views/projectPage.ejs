@@ -54,7 +54,7 @@
                 </div>
             </div>
             <nav class="navigation col-xl-7 col-md-12 d-flex justify-content-center justify-content-md-start gap-4 gap-md-5 ps-0 fw-semibold">
-                <a class="py-4 text-decoration-none text-white" href="#project-description">
+                <a class="py-4 text-decoration-none text-white active" href="#project-description">
                     Description
                 </a>
                 <a class="project-details py-4 text-decoration-none text-white" href="#project-details">
@@ -76,20 +76,39 @@
     <!--  Project Info Body-->
     <div class="d-flex justify-content-center mt-4">
         <div class="container row px-5 text-white">
+
+            <!-- Left Side content -->
             <div class="projet-images col-xl-5 col-md-12 gap-4 ps-0">
                 <% if(project.images) {%>
-                    <img src="<%= project.imagesArray[0].url%>" width="100%" height="400" id="project-main-image-display"/>
-                    <div class="project-gallary-holder">
+                    <img src="<%= project.imagesArray[0].url%>" width="100%" height="400" id="project-main-image-display" style="border-radius: 5px;"/>
+                    <div class="project-gallary-holder mb-4">
                         <% project.imagesArray.forEach((image, i) => { %>
                             <a href="/project/<%=project.id%>/image#<%=image.id%>">
-                                <img src="<%= image.url%>" width="100%" height="100" id="<%=image.id%>" style="object-fit: cover;"/>
+                                <img src="<%= image.url%>" width="100%" height="100" id="<%=image.id%>" style="object-fit: cover; border-radius: 5px;"/>
                             </a>
                         <% }) %>
                     </div>
                 <% }%>
             </div>
-            <div class="navigation col-xl-7 col-md-12 d-flex justify-content-center justify-content-md-start gap-4 gap-md-5 ps-0">
-                project details goes here
+
+            <!-- Right Side Content -->
+            <div class="col-xl-7 col-md-12 d-flex flex-column align-items-center align-items-md-start gap-4 gap-md-5 ps-0">
+                <% if(project.description) {%>
+                    <section id="project-description">
+                        <div  class="section-title fw-bold fs-5 mb-2 text-uppercase">Description</div>
+                        <div class="mb-3" style="white-space: pre-line;"><%-project.description%></div>
+                    </section>
+                    <div class="section-seperator w-100"></div>
+                <% }%>
+                <% if(project.details) {%>
+                    <section id="project-details">
+                        <div  class="section-title fw-bold fs-5 mb-2 text-uppercase">details</div>
+                        <% project.details_info.forEach(detail => {%>
+                        <div class="mb-3"><%-detail.body%></div>
+                        <%})%>
+                    </section>
+                    <div class="section-seperator w-100"></div>
+                <% }%>
             </div>
         </div>
     </div>
@@ -121,7 +140,7 @@
     const imagesLink= document.querySelectorAll('.projet-images a')
     for(const imageLink of imagesLink){
         imageLink.addEventListener('mouseover', changeGallaryImage)
-        imageLink.addEventListener('click', (e) => e.preventDefault())
+        imageLink.addEventListener('click', changeGallaryImage)
     }
 
     function changeGallaryImage(e){
@@ -131,4 +150,12 @@
         document.getElementById('project-main-image-display').src = imageUrl
     }
 
+
+    //take data-src from details image and put it into src to display image
+    let imgEl = document.getElementsByTagName('img');
+        for (var i = 0; i < imgEl.length; i++) {
+            if (imgEl[i].getAttribute('data-src')) {
+                imgEl[i].setAttribute('src', imgEl[i].getAttribute('data-src'));
+            }
+        }
 </script>

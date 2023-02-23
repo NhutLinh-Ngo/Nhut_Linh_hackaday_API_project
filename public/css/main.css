@@ -1,3 +1,7 @@
+figure {
+  display: block;
+}
+
 body {
   background-color: #171717;
   font-family: "Mulish", sans-serif;
@@ -61,7 +65,7 @@ h1 {
 }
 
 .project-image-container {
-  border: solid thin rgba(193, 158, 84, 0.6392156863);
+  border: solid thin #e0c17d;
   overflow: hidden;
   border-radius: 10px;
   width: 100%;
@@ -199,10 +203,28 @@ h1 {
 .project-gallary-holder {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .project-image-anchor {
   width: 120px;
   height: 100px;
+}
+
+.section-title {
+  color: #535050;
+}
+
+#project-details a {
+  color: #e0c17d;
+  text-decoration: none;
+}
+
+.section-seperator {
+  border: thin solid #6c6c6c;
+}
+
+#project-details img {
+  width: 100%;
+  border-radius: 5px;
 }
