@@ -110,7 +110,6 @@ app.get('/project/:id', async (req, res) => {
 
 	project.owner = await getUserById(project.owner_id);
 
-	console.log(project);
 	res.status(200).render('projectPage', { project });
 });
 

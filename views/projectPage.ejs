@@ -93,6 +93,8 @@
 
             <!-- Right Side Content -->
             <div class="col-xl-7 col-md-12 d-flex flex-column align-items-center align-items-md-start gap-4 gap-md-5 ps-0">
+
+                <!-- Project description -->
                 <% if(project.description) {%>
                     <section id="project-description">
                         <div  class="section-title fw-bold fs-5 mb-2 text-uppercase">Description</div>
@@ -100,6 +102,8 @@
                     </section>
                     <div class="section-seperator w-100"></div>
                 <% }%>
+
+                <!-- Project details -->
                 <% if(project.details) {%>
                     <section id="project-details">
                         <div  class="section-title fw-bold fs-5 mb-2 text-uppercase">details</div>
@@ -109,6 +113,77 @@
                     </section>
                     <div class="section-seperator w-100"></div>
                 <% }%>
+
+                <!-- Project Components -->
+                <% if(project.components) {%>
+                    <section id="project-components">
+                        <div class="section-title fw-bold fs-5 mb-2 text-uppercase">components</div>
+                        <% project.components_info.forEach(component=> {%>
+                            <div class="d-flex gap-5 mb-3">
+                                <div><%- component.quantity%> </div>
+                                <div class="text-gold">x</div>
+                                <div>
+                                    <div class="fw-light"><%- component.name%></div>
+                                    <small class="text-gold"><%- component.description%></small>
+                                </div>
+                            </div>
+                        <%})%>
+                    </section>
+                    <div class="section-seperator w-100"></div>
+                <% }%>
+
+                <!-- Project Logs -->
+                <% if(project.logs) {%>
+                    <section id="project-logs">
+                        <div class="section-title fw-bold fs-5 mb-2 text-uppercase">logs</div>
+                        <% project.logs_info.forEach((log, i)=> {%>
+                            <% let showLog = i <= 2 ? "show-log" : "dont-show-log"%>
+
+                            <div id="project-log-<%=i%>" class="<%= showLog %>">
+                                <div class="text-gold fs-4"><%- log.title %></div>
+                                <small><%= new Date(log.created * 1000).toLocaleDateString()%></small>
+                                <div  class="project-log-body mt-3 mb-5"><%- log.body %></div>
+                            </div>
+                    <%})%>
+                    <% if(project.logs_info.length > 3) {%>
+                    <button type="button" class="btn btn-dark w-100 text-gold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        View all <%= project.logs %> logs
+                    </button>
+                    <%}%>
+                    </section>
+                    <div class="section-seperator w-100"></div>
+                    <!-- Project Log Modal -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class=" modal-dialog  modal-xl">
+                            <div class="modal-content modal-container">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-gold text-center w-100" id="exampleModalLabel">Project logs</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body px-5">
+                                    <% project.logs_info.forEach((log, i)=> {%>
+                                        <div id="project-log-<%=i%>">
+                                            <div class="text-gold fs-4">
+                                                <%- log.title %>
+                                            </div>
+                                            <small>
+                                                <%= new Date(log.created * 1000).toLocaleDateString()%>
+                                            </small>
+                                            <div class="project-log-body mt-3 mb-5">
+                                                <%- log.body %>
+                                            </div>
+                                        </div>
+                                    <%})%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }%>
+
+
+                <!-- project Instruction -->
+
             </div>
         </div>
     </div>
@@ -153,9 +228,11 @@
 
     //take data-src from details image and put it into src to display image
     let imgEl = document.getElementsByTagName('img');
-        for (var i = 0; i < imgEl.length; i++) {
-            if (imgEl[i].getAttribute('data-src')) {
-                imgEl[i].setAttribute('src', imgEl[i].getAttribute('data-src'));
-            }
+    for (var i = 0; i < imgEl.length; i++) {
+        if (imgEl[i].getAttribute('data-src')) {
+            imgEl[i].setAttribute('src', imgEl[i].getAttribute('data-src'));
         }
+    }
+
+
 </script>
