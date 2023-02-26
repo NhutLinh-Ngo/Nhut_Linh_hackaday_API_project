@@ -1,9 +1,7 @@
-<div class="owner-info-wrapper absolute">
-    <div class="owner-info-username-container">
-        <img src="<%=owner.image_url%>" class="owner-info-image"/>
-        <div class="owner-info-screen-name"><%-owner.screen_name%></div>
-    </div>
+<div class="owner-info-wrapper" id="indentity-card">
+    <img src="<%=owner.image_url%>" class="owner-info-image rounded-circle" width="80px" height="80px"/>
     <div class="owner-info-container">
+        <div class="fs-5 fw-light text-gold"><%-owner.screen_name%></div>
         <% if (owner.location) {%>
             <div>
             Location: <%-owner.location%>
@@ -13,7 +11,7 @@
             <%-owner.about_me ? owner.about_me: owner.who_am_i ? owner.who_am_i : ""%>
         </div>
         <div>
-            <%-owner.followers%> Followers | Rank: <%-owner.rank%>
+            <%-owner.followers%> Followers | <%-owner.projects%> Projects
         </div>
     </div>
 </div>

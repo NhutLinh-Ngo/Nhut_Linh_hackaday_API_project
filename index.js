@@ -115,21 +115,21 @@ app.get('/project/:id', async (req, res) => {
 
 //get the project owner info
 app.get('/owner/:id', async (req, res) => {
-	const ownerId = req.params.id;
-	let ownerData = req.session.user;
-	if (!ownerData) ownerData = {};
+	let ownerId = req.params.id;
+	let ownerInfo = await fetch(
+		`https://api.hackaday.io/v1/users/${ownerId}?api_key=dkcFiON9GcOPZxrt`
+	);
+	let owner = await ownerInfo.json();
 
-	if (ownerData[ownerId]) return ownerData[ownerId];
-	else {
-		let ownerInfo = await fetch(
-			`https://api.hackaday.io/v1/users/${ownerId}?api_key=dkcFiON9GcOPZxrt`
+	res
+		.status(200)
+		.render(
+			'tooltipsOwnerInfo',
+			{ owner, layout: './layouts/tooltip' },
+			function (err, html) {
+				res.send(html);
+			}
 		);
-		ownerData[ownerId] = await ownerInfo.json();
-		req.session.user = ownerData;
-	}
-
-	console.log(ownerData[ownerId]);
-	// res.render('home', { owner: ownerData[ownerId] });
 });
 
 //configure express server port, on 3000

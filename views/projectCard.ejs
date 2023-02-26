@@ -5,7 +5,7 @@
             <% if(project.image_url) {%>
                 <img src="<%=project.image_url%>" alt="<%=project.name%>" class="project-image wh100"></img>
             <% }else { %>
-                <img src="/images/placeholder.jpg" alt="<%=project.name%>" class="project-image wh100"/>\
+                <img src="/images/placeholder.jpg" alt="<%=project.name%>" class="project-image wh100"/>
             <% }%>
         </a>
         <div class="project-summary absolute">
@@ -13,16 +13,14 @@
         </div>
     </div>
 
-        <div class="project-name truncate" >
-            <a href="/project/<%=project.id%>" class="project-name">
-            <%-project.name%>
-            </a>
-        </div>
-    <div class="project-owner" onmouseover="fetchOwnerdata('<%=project.id%>')">
-            <img src="<%=project.owner.image_url%>"/>
-            <div>
-                <%-project.owner.screen_name%>
-            </div>
-        <%- include('./tooltipsOwnerInfo', {owner: project.owner}) %>
+    <div class="project-name truncate" >
+        <a href="/project/<%=project.id%>" class="project-name">
+        <%-project.name%>
+        </a>
     </div>
+
+    <p class="project-owner mt-1" owner-id="<%= project.owner.id%>">
+        <img src="<%=project.owner.image_url%>">
+        <%-project.owner.screen_name%>
+    </p>
 </div>
