@@ -2,10 +2,10 @@
 const links = document.querySelectorAll('.navigation a');
 
 for (const link of links) {
-	link.addEventListener('click', clickHandler);
+	link.addEventListener('click', handleClickScroll);
 }
 
-function clickHandler(e) {
+function handleClickScroll(e) {
 	e.preventDefault();
 	const href = this.getAttribute('href');
 	const offsetTop = document.querySelector(href).offsetTop;

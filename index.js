@@ -22,7 +22,8 @@ app.use(
 	session({
 		secret: 'secret-key',
 		resave: false,
-		saveUninitialized: false
+		saveUninitialized: false,
+		cookie: { maxAge: 600000 }
 	})
 );
 
@@ -41,23 +42,30 @@ const getUserById = async (userId) => {
 	).then((res) => res.json());
 };
 
-//get all projects and store in session, for faster access if it is needed to be reload.
-app.get('/', async (req, res) => {
-	let projectsData = req.session.projects;
+const fetchProjectAPIByPageAndFilter = async (page, filter) => {
+	const filterBy = filter ? filter : 'newest';
+	const pageNum = page ? '&page=' + page : '';
+	return await fetch(
+		`https://api.hackaday.io/v1/projects?api_key=dkcFiON9GcOPZxrt&sortby=${filterBy}&per_page=24${pageNum}`
+	).then((res) => res.json());
+};
+// redirect to /projects
+app.get('/', (req, res) => {
+	res.redirect('/projects?sortby=newest');
+});
 
+//get all projects and store in session, for faster access if it is needed to be reload.
+app.get('/projects', async (req, res) => {
+	let projectsData = req.session.projects;
+	const page = req.query.page ? parseInt(req.query.page) : 1;
+	const sortby = parseInt(req.query.sortby);
 	// check the session if projects are already loaded then dont fetch again.
 	if (!projectsData) {
-		let projects = await fetch(
-			`https://api.hackaday.io/v1/projects?api_key=dkcFiON9GcOPZxrt&sortby=newest`
-		);
-		projectsData = await projects.json();
+		projectsData = await fetchProjectAPIByPageAndFilter(page, sortby);
 
 		for (let i = 0; i < projectsData.projects.length; i++) {
 			let project = projectsData.projects[i];
-			let ownerInfo = await fetch(
-				`https://api.hackaday.io/v1/users/${project.owner_id}?api_key=dkcFiON9GcOPZxrt`
-			);
-			ownerInfo = await ownerInfo.json();
+			let ownerInfo = await getUserById(project.owner_id);
 			projectsData.projects[i].owner = ownerInfo;
 		}
 		req.session.projects = projectsData;
@@ -65,6 +73,38 @@ app.get('/', async (req, res) => {
 
 	res.render('home', { projects: projectsData.projects });
 });
+
+function paginatedResults(model) {
+	// middleware function
+	return (req, res, next) => {
+		const page = parseInt(req.query.page);
+		const limit = parseInt(req.query.limit);
+
+		// calculating the starting and ending index
+		const startIndex = (page - 1) * limit;
+		const endIndex = page * limit;
+
+		const results = {};
+		if (endIndex < model.length) {
+			results.next = {
+				page: page + 1,
+				limit: limit
+			};
+		}
+
+		if (startIndex > 0) {
+			results.previous = {
+				page: page - 1,
+				limit: limit
+			};
+		}
+
+		results.results = model.slice(startIndex, endIndex);
+
+		res.paginatedResults = results;
+		next();
+	};
+}
 
 // get project based on Id
 app.get('/project/:id', async (req, res) => {
