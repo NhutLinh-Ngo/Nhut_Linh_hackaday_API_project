@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
-var SessionStorage = require('./public/SessionStorage/storageMap');
+var SessionStorage = require('./public/session_storage/storage_map');
 
 const fetch = (...args) =>
 	import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -110,10 +110,10 @@ app.get('/project/:id', async (req, res) => {
 
 	project.owner = await getUserById(project.owner_id);
 
-	res.status(200).render('projectPage', { project });
+	res.status(200).render('project_page', { project });
 });
 
-//get the project owner info
+//get the project owner info from API.
 app.get('/owner/:id', async (req, res) => {
 	let ownerId = req.params.id;
 	let ownerInfo = await fetch(
@@ -124,7 +124,7 @@ app.get('/owner/:id', async (req, res) => {
 	res
 		.status(200)
 		.render(
-			'tooltipsOwnerInfo',
+			'tooltip_owner_info',
 			{ owner, layout: './layouts/tooltip' },
 			function (err, html) {
 				res.send(html);
