@@ -1,11 +1,37 @@
-<div class="project-list-page-wrapper border">
-    <h1 id="page-title">Projects</h1>
+<div class="project-list-page-wrapper">
+    <h1 id="page-title" class="mt-5">All Projects</h1>
+    <div class="sortby-wrapper d-flex justify-content-end align-items-center gap-1 mb-3">
+        <div class="sortby-title text-uppercase fw-bold">sort by: </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <% function sortedBy(key){
+                    switch(key){
+                        case 'skulls':
+                            return 'Most Liked';
+                        case 'newest':
+                            return 'Newest';
+                        case 'views':
+                            return 'Most viewed';
+                        default:
+                            return 'most followers';
+                    }
+                } %>
+                <%= sortedBy(sortby) %>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="/projects?sortby=skulls">Most Liked</a></li>
+                <li><a class="dropdown-item" href="/projects?sortby=newest">Newest</a></li>
+                <li><a class="dropdown-item" href="/projects?sortby=views">Most viewed</a></li>
+                <li><a class="dropdown-item" href="/projects?sortby=followers">Most followers</a></li>
+            </ul>
+        </div>
+    </div>
     <div id="projects-card-wrapper">
         <% projects.forEach(project => {%>
             <%- include('./project_card', {project: project}) %>
         <% }); %>
     </div>
-    <% %>
     <div class="pagination-wrapper d-flex justify-content-between gap-2 mb-5">
         <% if(page > 1) {%>
         <a href="/projects?page=<%= page - 1 %>&sortby=<%= sortby%>" class="pagination-button flex-grow-1 d-flex justify-content-center align-items-center text-gold fs-5">

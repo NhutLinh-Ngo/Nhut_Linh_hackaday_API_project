@@ -42,7 +42,8 @@ window.addEventListener('popstate', (e) => {
 function handleStateChange(link) {
 	const xmlhttp = new XMLHttpRequest();
 	xmlhttp.onload = function () {
-		document.main.innerHTML = this.responseText;
+		const main = document.getElementsByTagName('main');
+		main[0].innerHTML = this.responseText;
 		addEventListenerToPaginationButton();
 		addEventListenerToProjectOwner();
 	};
