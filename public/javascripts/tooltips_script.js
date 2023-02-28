@@ -13,13 +13,6 @@ function requestOwnerInfo(ownerId, offset) {
 	xmlhttp.send();
 }
 
-const ProjectOwnersDiv = document.querySelectorAll('.project-owner');
-
-for (const owner of ProjectOwnersDiv) {
-	owner.addEventListener('mouseleave', handleMouseLeave);
-	owner.addEventListener('mouseenter', displayOwnerTooltips);
-}
-
 var requestOwnerDataTimer;
 
 // function to handle display owner tooltips
@@ -38,4 +31,14 @@ function handleMouseLeave(e) {
 	clearTimeout(requestOwnerDataTimer);
 	let ownerInfoCardDiv = document.getElementById(`owner-info-card`);
 	if (ownerInfoCardDiv) ownerInfoCardDiv.remove();
+}
+
+// adding eventlistener to project's Owner div
+export default function addEventListenerToProjectOwner() {
+	const ProjectOwnersDiv = document.querySelectorAll('.project-owner');
+
+	for (const owner of ProjectOwnersDiv) {
+		owner.addEventListener('mouseleave', handleMouseLeave);
+		owner.addEventListener('mouseenter', displayOwnerTooltips);
+	}
 }

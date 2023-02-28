@@ -62,9 +62,10 @@ iframe{
     align-items: center;
     box-sizing: border-box;
     padding: 0 10%;
+    max-width: 100%;
 }
 
-.projects-card-wrapper{
+#projects-card-wrapper{
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-gap: 1rem;
@@ -302,4 +303,22 @@ iframe{
         color: #e0c17d;
         text-decoration: none;
     }
+}
+
+
+// Pagination SCSS
+.pagination-wrapper{
+    width: 100%;
+    max-width: 1250px;
+}
+
+.pagination-button{
+    text-decoration: none;
+    background-color: rgb(67, 67, 67);
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.pagination-button:hover{
+    background-color: rgb(58, 58, 58);
 }

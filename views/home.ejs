@@ -1,9 +1,19 @@
-<div class="project-list-page-wrapper">
+<div class="project-list-page-wrapper border">
     <h1 id="page-title">Projects</h1>
-    <div class="projects-card-wrapper">
+    <div id="projects-card-wrapper">
         <% projects.forEach(project => {%>
             <%- include('./project_card', {project: project}) %>
         <% }); %>
-        </div>
+    </div>
+    <% %>
+    <div class="pagination-wrapper d-flex justify-content-between gap-2 mb-5">
+        <% if(page > 1) {%>
+        <a href="/projects?page=<%= page - 1 %>&sortby=<%= sortby%>" class="pagination-button flex-grow-1 d-flex justify-content-center align-items-center text-gold fs-5">
+            < Previous
+        </a>
+        <% }%>
+        <a href="/projects?page=<%= page + 1 %>&sortby=<%= sortby%>" class="pagination-button flex-grow-1 d-flex justify-content-center align-items-center text-gold fs-5">
+            Next >
+        </a>
+    </div>
 </div>
-<script src="/javascripts/tooltips_script.js" type="application/javascript"></script>
