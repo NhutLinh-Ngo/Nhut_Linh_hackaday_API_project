@@ -59,34 +59,41 @@ app.get('/', (req, res) => {
 app.get('/projects', async (req, res) => {
 	const page = req.query.page ? parseInt(req.query.page) : 1;
 	const sortby = req.query.sortby;
+	let projectsData = {};
 
-	let projectsData = await fetchProjectAPIByPageAndFilter(page, sortby);
+	projectsData[page] = await fetchProjectAPIByPageAndFilter(page, sortby);
 
-	for (let i = 0; i < projectsData.projects.length; i++) {
-		let project = projectsData.projects[i];
+	for (let i = 0; i < projectsData[page].projects.length; i++) {
+		let project = projectsData[page].projects[i];
 		let ownerInfo = await getUserById(project.owner_id);
-		projectsData.projects[i].owner = ownerInfo;
+		projectsData[page].projects[i].owner = ownerInfo;
 	}
 
-	res.render('home', { projects: projectsData.projects, page, sortby });
+	req.session.projects = projectsData;
+	res.render('home', { projects: projectsData[page].projects, page, sortby });
 });
 
 app.post('/projects', async (req, res) => {
 	const page = req.query.page ? parseInt(req.query.page) : 1;
 	const sortby = req.query.sortby;
+	let projectsData = req.session.projects;
 
-	let projectsData = await fetchProjectAPIByPageAndFilter(page, sortby);
+	if (!projectsData[page]) {
+		let data = await fetchProjectAPIByPageAndFilter(page, sortby);
 
-	for (let i = 0; i < projectsData.projects.length; i++) {
-		let project = projectsData.projects[i];
-		let ownerInfo = await getUserById(project.owner_id);
-		projectsData.projects[i].owner = ownerInfo;
+		for (let i = 0; i < data.projects.length; i++) {
+			let project = data.projects[i];
+			let ownerInfo = await getUserById(project.owner_id);
+			data.projects[i].owner = ownerInfo;
+		}
+
+		projectsData[page] = data;
 	}
 
 	res.render(
 		'home',
 		{
-			projects: projectsData.projects,
+			projects: projectsData[page].projects,
 			page,
 			sortby,
 			layout: './layouts/blank_layout'

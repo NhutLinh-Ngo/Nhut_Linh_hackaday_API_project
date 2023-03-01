@@ -267,6 +267,10 @@ iframe {
   border: thin solid #6c6c6c;
 }
 
+.dead-link {
+  color: #434343;
+}
+
 #project-logs img {
   max-width: 100%;
   border-radius: 5px;
@@ -293,6 +297,15 @@ iframe {
   border-radius: 5px;
 }
 .modal-body a {
+  color: #e0c17d;
+  text-decoration: none;
+}
+
+#project-instructions img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+#project-instructions a {
   color: #e0c17d;
   text-decoration: none;
 }

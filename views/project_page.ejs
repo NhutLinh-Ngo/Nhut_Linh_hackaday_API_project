@@ -57,18 +57,34 @@
                 <a class="py-4 text-decoration-none text-white active" href="#project-description">
                     Description
                 </a>
-                <a class="project-details py-4 text-decoration-none text-white" href="#project-details">
-                    Details
-                </a>
+                <% if(project.details) {%>
+                    <a class="project-details py-4 text-decoration-none text-white" href="#project-details">
+                        Details
+                    </a>
+                <%} else {%>
+                    <div class="dead-link py-4">Details</div>
+                <%}%>
+                <% if(project.components) {%>
                 <a class="project-components py-4 text-decoration-none text-white" href="#project-components">
                     Components
                 </a>
+                <%} else {%>
+                    <div class="dead-link py-4">Components</div>
+                <%}%>
+                <% if(project.logs) {%>
                 <a class="project-logs py-4 text-decoration-none text-white" href="#project-logs">
                     Logs
                 </a>
+                <%} else {%>
+                    <div class="dead-link py-4">Logs</div>
+                <%}%>
+                <% if(project.instruction) {%>
                 <a class="project-instructions py-4 text-decoration-none text-white" href="#project-instructions">
                     Instructions
                 </a>
+                <%} else {%>
+                    <div class="dead-link py-4">Instructions</div>
+                <%}%>
             </nav>
         </div>
     </div>
@@ -183,7 +199,21 @@
 
 
                 <!-- project Instruction -->
-
+                <% if(project.instruction) {%>
+                    <section id="project-instructions">
+                        <div class="section-title fw-bold fs-5 mb-2 text-uppercase">Intrunctions</div>
+                    <% project.instruction_info.forEach((int, i)=> {%>
+                        <div class="fw-bold fs-2">
+                            Step <%= i + 1%>
+                        </div>
+                        <div>
+                            <div class="text-gold fs-4"><%= int.title %></div>
+                            <div class="text-gold fs-4"> <%- int.body %></div>
+                        </div>
+                    <%})%>
+                    </section>
+                    <div class="section-seperator w-100"></div>
+                    <% }%>
             </div>
         </div>
     </div>

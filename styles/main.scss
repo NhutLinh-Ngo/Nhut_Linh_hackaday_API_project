@@ -283,8 +283,9 @@ iframe{
 .section-seperator{
     border: thin solid #6c6c6c;
 }
-
-
+.dead-link{
+    color: #434343;
+}
 
 // Project logs
 #project-logs{
@@ -321,6 +322,18 @@ iframe{
     }
 }
 
+// Project instruction
+#project-instructions {
+    img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    a {
+        color: #e0c17d;
+        text-decoration: none;
+    }
+}
 
 // Pagination SCSS
 .pagination-wrapper{
