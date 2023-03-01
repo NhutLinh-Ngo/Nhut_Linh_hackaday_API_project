@@ -1,3 +1,5 @@
+@import 'error_page.scss';
+
 $blackBackground: #171717;
 $whiteText: white;
 $goldText: #e0c17d;
@@ -25,7 +27,6 @@ iframe{
     width: 100%;
     border-radius: 5px;
 }
-
 
 
 // reuseable class names
