@@ -19,7 +19,11 @@ router.get(
 router.post('/projects', controller.postNewPaginatedProjectsData);
 
 // get project based on Id
-router.get('/project/:id', controller.projectDetailsPage);
+router.get(
+	'/project/:id',
+	controller.projectDetailsPage,
+	controller.loadRecommnedProjects
+);
 
 //get the project owner info from API.
 router.get('/owner/:id', controller.OwnerInfoToolTips);

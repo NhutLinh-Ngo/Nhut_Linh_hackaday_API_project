@@ -68,11 +68,12 @@ exports.postNewPaginatedProjectsData = async (req, res) => {
 	);
 };
 
-exports.projectDetailsPage = async (req, res) => {
+exports.projectDetailsPage = async (req, res, next) => {
 	const projectId = req.params.id;
 	let project = await fetchFunc.getProjectInfoById(projectId);
 
-	if (project.project == 0) {
+	// console.log(project.message);
+	if (project.project == 0 || project.message == 'Hourly limit exceeded') {
 		res.status(404).render('error_page');
 	} else {
 		// get project details if available
@@ -111,9 +112,19 @@ exports.projectDetailsPage = async (req, res) => {
 		}
 
 		project.owner = await fetchFunc.getUserById(project.owner_id);
-
-		res.status(200).render('project_page', { project });
+		req.project = project;
+		next();
 	}
+};
+
+exports.loadRecommnedProjects = async (req, res) => {
+	let project = req.project;
+	const tags = project.tags.join(',');
+
+	let similarFoundProject = await fetchFunc.findRelatedProjectedByTag(tags);
+
+	console.log(similarFoundProject);
+	res.status(200).render('project_page', { project, similarFoundProject });
 };
 
 exports.OwnerInfoToolTips = async (req, res) => {
