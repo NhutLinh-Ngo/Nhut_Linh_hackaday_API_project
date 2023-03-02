@@ -44,21 +44,20 @@ exports.loadNewPaginatedData = async (req, res) => {
 			}
 			projectsData[page] = data;
 			req.session.projects = projectsData;
-
-			res.status(200).render(
-				'home',
-				{
-					projects: projectsData[page].projects,
-					page,
-					sortby,
-					layout: './layouts/blank_layout'
-				},
-				function (err, html) {
-					res.send(html);
-				}
-			);
 		}
 	}
+	res.status(200).render(
+		'home',
+		{
+			projects: projectsData[page].projects,
+			page,
+			sortby,
+			layout: './layouts/blank_layout'
+		},
+		function (err, html) {
+			res.send(html);
+		}
+	);
 };
 
 exports.projectDetailsPage = async (req, res) => {
