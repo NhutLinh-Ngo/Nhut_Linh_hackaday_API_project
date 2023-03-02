@@ -5,6 +5,7 @@ const path = require('path');
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
 const fetchFunc = require('./controllers/route_controller');
+const router = require('./routes/main');
 //serving static css file
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
@@ -27,18 +28,11 @@ app.get('/', (req, res) => {
 	res.redirect('/projects?sortby=newest');
 });
 
-//get all projects and store in session, for faster access if it is needed to be reload.
-app.get('/projects', fetchFunc.projectHomePage);
-// post next or previous page
-app.post('/projects', fetchFunc.loadNewPaginatedData);
-
-// get project based on Id
-app.get('/project/:id', fetchFunc.projectDetailsPage);
-
-//get the project owner info from API.
-app.get('/owner/:id', fetchFunc.OwnerInfoToolTips);
+app.use('/', router);
 
 //configure express server port, on 3000
 app.listen(3000, () => {
 	console.log('server started on port 3000');
 });
+
+module.exports = app;
