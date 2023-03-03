@@ -6,7 +6,7 @@ exports.loadLandingPageProjects = async (req, res, next) => {
 
 	// fetch API based on pages and sortby key work
 	let data = await fetchFunc.fetchProjectAPIByPageAndFilter(page, sortby);
-	if (data.error) {
+	if (data.error || data.message == 'Hourly limit exceeded') {
 		res.status(404).render('error_page');
 	} else {
 		req.projectsData = data;
@@ -42,7 +42,7 @@ exports.postNewPaginatedProjectsData = async (req, res) => {
 	let projectsData = req.session.projects;
 	if (!projectsData[page]) {
 		let data = await fetchFunc.fetchProjectAPIByPageAndFilter(page, sortby);
-		if (data.error) {
+		if (data.error || data.message == 'Hourly limit exceeded') {
 			res.status(404).render('error_page');
 		} else {
 			for (let i = 0; i < data.projects.length; i++) {
@@ -123,7 +123,6 @@ exports.loadRecommnedProjects = async (req, res) => {
 
 	let similarFoundProject = await fetchFunc.findRelatedProjectedByTag(tags);
 
-	console.log(similarFoundProject);
 	res.status(200).render('project_page', { project, similarFoundProject });
 };
 

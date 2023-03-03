@@ -217,6 +217,7 @@
             </div>
         </div>
     </div>
+    <%if(similarFoundProject.projects) {%>
     <div class="project-recommened-wrapper container px-5 mt-4 mb-5">
         <div class="fw-bold fs-5 mb-2 text-uppercase section-title">similar Projects</div>
         <div class="project-recommened-container">
@@ -244,5 +245,6 @@
             <% }) %>
         </div>
     </div>
+    <%}%>
 </div>
 <script src="/javascripts/project_page_script.js" type="text/javascript"></script>

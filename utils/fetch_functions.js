@@ -15,24 +15,25 @@ exports.getProjectInfoById = async (projectId, key) => {
 };
 
 exports.getUserById = async (userId) => {
-	return await axios
-		.get(`https://api.hackaday.io/v1/users/${userId}?api_key=dkcFiON9GcOPZxrt`)
-		.then((response) => response.data);
+	let user = await axios.get(
+		`https://api.hackaday.io/v1/users/${userId}?api_key=dkcFiON9GcOPZxrt`
+	);
+
+	return user.data;
 };
 
 exports.fetchProjectAPIByPageAndFilter = async (page, filter = 'newest') => {
 	const pageNum = page ? '&page=' + page : '';
-	return await axios
-		.get(
-			`https://api.hackaday.io/v1/projects?api_key=dkcFiON9GcOPZxrt&sortby=${filter}&per_page=24${pageNum}`
-		)
-		.then((response) => response.data);
+	let projects = await axios.get(
+		`https://api.hackaday.io/v1/projects?api_key=dkcFiON9GcOPZxrt&sortby=${filter}&per_page=24${pageNum}`
+	);
+	return projects.data;
 };
 
 exports.findRelatedProjectedByTag = async (tag) => {
-	return await axios
-		.get(
-			`https://api.hackaday.io/v1/projects/search?search_term=${tag}&api_key=dkcFiON9GcOPZxrt&per_page=4`
-		)
-		.then((response) => response.data);
+	let projects = await axios.get(
+		`https://api.hackaday.io/v1/projects/search?search_term=${tag}&api_key=dkcFiON9GcOPZxrt&per_page=4`
+	);
+
+	return projects.data;
 };

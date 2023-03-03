@@ -1,3 +1,4 @@
+@import 'footer.scss';
 @import 'error_page.scss';
 
 $blackBackground: #171717;
@@ -290,14 +291,20 @@ iframe{
 
 // Project logs
 #project-logs{
+    max-width: 100%;
     img{
-       max-width: 100%;
        border-radius: 5px;
     }
     a {
        color: #e0c17d;
        text-decoration: none;
     }
+
+        * {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
 }
 
 .dont-show-log{
@@ -326,7 +333,7 @@ iframe{
 // Project instruction
 #project-instructions {
     img {
-        max-width: 100%;
+
         border-radius: 5px;
     }
 
@@ -334,6 +341,13 @@ iframe{
         color: #e0c17d;
         text-decoration: none;
     }
+        max-width: 100%;
+
+        * {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
 }
 
 // Pagination SCSS
