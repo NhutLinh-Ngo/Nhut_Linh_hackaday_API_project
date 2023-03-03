@@ -1,0 +1,146 @@
+// Project page
+
+// Project titles
+.project-title {
+    font-size: 3rem;
+}
+
+.summary {
+    width: 60%;
+    margin: 0 auto;
+    padding: 0 5%;
+    font-size: 1.3rem;
+}
+// project stats
+.project-stats-wrapper {
+    background-color: #6c6c6c;
+    border: solid thin #c19e54a3;
+}
+
+
+// project gallary
+.projet-images {
+    display: flex;
+    flex-direction: column;
+    padding-right: 120px;
+}
+.project-gallary-holder {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.project-image-anchor {
+    width: 120px;
+    height: 100px;
+}
+
+// project-description
+.project-description {
+    max-width: 100%;
+
+    * {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+}
+
+// Project details sections
+.section-title {
+    color: #535050;
+}
+
+#project-details {
+    max-width: 100%;
+
+    * {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    a {
+        color: #e0c17d;
+        text-decoration: none;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 5px;
+    }
+}
+
+.section-seperator {
+    border: thin solid #6c6c6c;
+}
+
+.dead-link {
+    color: #434343;
+}
+
+// Project logs
+#project-logs {
+    max-width: 100%;
+
+    img {
+        border-radius: 5px;
+    }
+
+    a {
+        color: #e0c17d;
+        text-decoration: none;
+    }
+
+    * {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+}
+
+.dont-show-log {
+    display: none;
+}
+
+// Project logs modal
+.modal-container {
+    background-color: $blackBackground;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-body {
+    img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    a {
+        color: #e0c17d;
+        text-decoration: none;
+    }
+}
+
+// Project instruction
+#project-instructions {
+    img {
+
+        border-radius: 5px;
+    }
+
+    a {
+        color: #e0c17d;
+        text-decoration: none;
+    }
+
+    max-width: 100%;
+
+    * {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+}

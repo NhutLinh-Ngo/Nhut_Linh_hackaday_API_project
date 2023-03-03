@@ -2,7 +2,7 @@ const fetchFunc = require('../utils/fetch_functions');
 
 exports.loadLandingPageProjects = async (req, res, next) => {
 	const page = req.query.page ? parseInt(req.query.page) : 1;
-	const sortby = req.query.sortby;
+	const sortby = req.query.sortby ? req.query.sortby : 'newest';
 
 	// fetch API based on pages and sortby key work
 	let data = await fetchFunc.fetchProjectAPIByPageAndFilter(page, sortby);
