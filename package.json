@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "sass-watch": "sass --no-source-map --watch styles/main.scss public/css/main.css",
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "all": "npm-run-all --parallel start sass-watch"
   },
   "keywords": [],
